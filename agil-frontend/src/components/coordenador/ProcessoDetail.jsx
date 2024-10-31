@@ -31,7 +31,7 @@ export default function ProcessoDetail() {
   const getProcessoAndProjetos = async () => {
     try {
       const processoResponse = await axios.get(`http://127.0.0.1:5000/processo/${processoId}`);
-      setProcessoName(processoResponse.data.titulo);
+      setProcessoName(processoResponse.data.titulo || 'Processo não nomeado');
 
       const projetosResponse = await axios.get(`http://127.0.0.1:5000/projeto/processo/${processoId}`, {
         headers: {
@@ -65,7 +65,7 @@ export default function ProcessoDetail() {
     
           <Box mb={4}>
             <Heading as="h2" size="lg" textAlign="left">
-              Processo Seletivo: {processoName}
+              Processo Seletivo: {processoName || 'Processo sem Título'}
             </Heading>
             <Separator my={4} />
           </Box>

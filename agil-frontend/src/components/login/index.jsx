@@ -24,8 +24,8 @@ export default function Login() {
                else if (localStorage.getItem('role') === 'professor') {
                     window.location.href = '/professor';
                 }
-                else if (localStorage.getItem('role') === 'aluno') {
-                    window.location.href = '/aluno';
+                else if (localStorage.getItem('role') === 'estudante') {
+                    window.location.href = '/estudante';
 
             }
             }

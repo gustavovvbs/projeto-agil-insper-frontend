@@ -13,7 +13,9 @@ import {
 import { defaultSystem } from '@chakra-ui/react';
 import ProcessoDetail from './components/coordenador/ProcessoDetail.jsx'
 import CreateProcesso from './components/CreateProcesso.jsx';
-
+import Estudante from './components/estudante/index.jsx';
+import Apply from './components/estudante/Apply.jsx';
+import Matchmaking from './components/estudante/Matchmaking.jsx';
 const router = createBrowserRouter([
   {
     path: '/coordenador',
@@ -22,6 +24,20 @@ const router = createBrowserRouter([
   {
     path: '/coordenador/:processoId',
     element: <ProcessoDetail />,
+  },
+  {
+    path: '/estudante',
+    element: <Estudante />
+  },
+  {
+    path: '/projects/:projetoId/apply',
+    element: <Apply />
+
+  },
+  {
+    path: '/matchmaking',
+    element: <Matchmaking />
+
   },
   {
     path: '/login',

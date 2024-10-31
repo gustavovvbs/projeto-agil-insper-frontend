@@ -1,23 +1,38 @@
+/* Refactored App.css following the Mini Style Guide */
+
+/* Apply 'Kumbh Sans' font and global styles */
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 32px; /* 8 * 4px */
   text-align: center;
+  font-family: 'Kumbh Sans', sans-serif;
+  background-color: #17191C;
+  color: #FFFFFF;
 }
 
+/* Logo styling with Glassmorphism and Neon Lights */
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 96px; /* 6em assuming 16px base font size */
+  padding: 24px; /* 6 * 4px */
   will-change: filter;
   transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  background: rgba(255, 255, 255, 0.1); /* Branco com opacidade */
+  border-radius: 16px; /* 4 * 4px */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.logo:hover {
+  filter: drop-shadow(0 0 2em #690DDD); /* Neon Purple Accent */
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #0E9C8B); /* Accent Teal */
+}
+
+/* Keyframes for logo spin animation */
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -25,18 +40,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }

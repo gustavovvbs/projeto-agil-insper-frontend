@@ -17,6 +17,9 @@ function App() {
     if (role === 'coordenador') {
       navigate('/coordenador');
     }
+    if (role === 'estudante') {
+      navigate('/estudante');
+    }
   }, [role, navigate])
 
 
