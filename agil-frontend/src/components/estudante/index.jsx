@@ -81,7 +81,7 @@ export default function Estudante() {
     <Box p={8}>
       {/* Navbar */}
       <Flex justify='space-between' align='center' mb={8}>
-        <Heading as='h1' size='lg' color='green.500'>
+        <Heading as='h1' size='4xl'>
           SciConnect
         </Heading>
         <Flex align='center'>
@@ -105,10 +105,10 @@ export default function Estudante() {
       </Flex>
 
       {/* Page Heading */}
-      <Heading as='h2' size='6xl' mb={6} textAlign='left'>
+      <Heading as='h2' size='6xl' mb={12} mt={5} textAlign='center'>
         Projetos Disponíveis
       </Heading>
-      <Separator mb={6} />
+      {/* <Separator mb={6} size={'xs'} color={} /> */}
 
       {/* Projects List */}
       {projetos.length > 0 ? (
