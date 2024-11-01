@@ -33,11 +33,11 @@ export default function Estudante() {
 
   const getProjects = async () => {
     try {
-      const projetosResponse = await axios.get('http://127.0.0.1:5000/projeto');
+      const projetosResponse = await axios.get('https://projeto-agil-insper-backend.onrender.com/projeto');
       if (projetosResponse.status === 200 && Array.isArray(projetosResponse.data)) {
         const projetosData = await Promise.all(
             projetosResponse.data.map(async (projeto) => {
-                const professorResponse = await axios.get(`http://127.0.0.1:5000/professor/${projeto.professor}`);
+                const professorResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/professor/${projeto.professor}`);
                 return {
                     ...projeto,
                     professorName: professorResponse.data.nome,
@@ -66,7 +66,7 @@ export default function Estudante() {
   };
 
   const openOtherPage = () => {
-    navigate('/other-page');
+    navigate('/matchmaking');
   };
 
   if (loading) {
@@ -85,13 +85,14 @@ export default function Estudante() {
           SciConnect
         </Heading>
         <Flex align='center'>
-          <IconButton
-            icon={<FiGrid />}
-            variant='ghost'
-            aria-label='Other Page'
+          <Button
+            eftIcon={<FiLogOut />}
+            colorScheme='red'
+            variant='solid'
             onClick={openOtherPage}
-            mr={4}
-          />
+          >
+            Matchmaking
+          </Button>
           <Button
             leftIcon={<FiLogOut />}
             colorScheme='red'

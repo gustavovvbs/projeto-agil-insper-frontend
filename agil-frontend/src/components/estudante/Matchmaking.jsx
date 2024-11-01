@@ -15,6 +15,8 @@ import {
 import { Field } from '../ui/field';
 import { Switch } from '../ui/switch';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Matchmaking() {
   const [themeEnjoyed, setThemeEnjoyed] = useState('');
@@ -27,10 +29,16 @@ export default function Matchmaking() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const navigate = useNavigate()
+
+  const goToProjetos = () => {
+    navigate('/estudante')
+  }
+
 
   const fetchProfessores = async () => {
     try {
-        const response = await axios.get('http://127.0.0.1:5000/professor');
+        const response = await axios.get('https://projeto-agil-insper-backend.onrender.com/professor');
         setLoading(true);
       if (response.status !== 200) {
         throw new Error('Erro ao carregar professores.');
@@ -55,7 +63,7 @@ export default function Matchmaking() {
     };
 
     try {
-      const response = await axios.post('http://127.0.0.1:5000/matchmaking/query', formData,
+      const response = await axios.post('https://projeto-agil-insper-backend.onrender.com/matchmaking/query', formData,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
       setProfessors(response.data);
     } catch (error) {
@@ -65,29 +73,29 @@ export default function Matchmaking() {
   };
 
   return (
-    <Box fontFamily="Kumbh Sans" color="#fff">
+    <Box fontFamily="Kumbh Sans" color="#fff" bg={'#17191C'} >
       {/* Navbar */}
       <Flex
         bg="#17191C"
-        color="#FFFFFF"
+        color="#fff"
         px="4"
         py="3"
         align="center"
-        justify="space-between"
+        gap="80%"
         position="fixed"
         top="0"
         width="100%"
         zIndex="1000"
         boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
       >
-        <Heading size="4xl" color="#690DDD">SciConnect</Heading>
-        <Button as={Link} to="/estudante" color="#0E9C8B" variant="outline">
+        <Heading size="4xl" color="#DC143C">SciConnect</Heading>
+        <Button as={Link} to="/estudante" color="#DC143C" variant="outline" borderColor={'#808080'} _hover={{ bg: "FFFFF" }} onClick={goToProjetos}>
           Ver Projetos
         </Button>
       </Flex>
 
       {/* Spacer to prevent content from being hidden behind navbar */}
-      <Box height="60px" />
+      <Box height="60px"/>
 
       {/* Form Container with Glassmorphism */}
       <Box
@@ -102,7 +110,7 @@ export default function Matchmaking() {
       >
         <form onSubmit={handleSubmit}>
           <Stack spacing={8}>
-            <Heading as="h1" size="3xl" textAlign="left" color="#690DDD" mb={4}>
+            <Heading as="h1" size="3xl" textAlign="left" color="#fff" mb={4}>
               Encontre seu Professor
             </Heading>
 
@@ -114,6 +122,7 @@ export default function Matchmaking() {
                 bg="#4C4F54"
                 color="#FFFFFF"
                 border="1px solid rgba(255, 255, 255, 0.3)"
+                _placeholder={{ color: "#787878" }}
               />
             </Field>
 
@@ -125,6 +134,7 @@ export default function Matchmaking() {
                 bg="#4C4F54"
                 color="#FFFFFF"
                 border="1px solid rgba(255, 255, 255, 0.3)"
+                _placeholder={{ color: "#787878" }}
               />
             </Field>
 
@@ -136,6 +146,7 @@ export default function Matchmaking() {
                 bg="#4C4F54"
                 color="#FFFFFF"
                 border="1px solid rgba(255, 255, 255, 0.3)"
+                _placeholder={{ color: "#787878" }}
               />
             </Field>
 
@@ -148,6 +159,7 @@ export default function Matchmaking() {
                 bg="#4C4F54"
                 color="#FFFFFF"
                 border="1px solid rgba(255, 255, 255, 0.3)"
+                _placeholder={{ color: "#787878" }}
               />
             </Field>
 
@@ -168,16 +180,17 @@ export default function Matchmaking() {
                   bg="#4C4F54"
                   color="#FFFFFF"
                   border="1px solid rgba(255, 255, 255, 0.3)"
+                  _placeholder={{ color: "#787878" }}
                 />
               </Field>
             )}
 
-            {error && <Text color="#690DDD">{error}</Text>}
+            {error && <Text color="#DC143C">{error}</Text>}
 
-            <Button type="submit" onClick={fetchProfessores} colorScheme="brand" size="lg" boxShadow="0 0 10px #690DDD" mt={4}>
+            <Button type="submit" onClick={fetchProfessores} colorScheme="brand" size="lg" boxShadow="0 0 10px #DC143C" mt={4}>
               Encontrar Professores
             </Button>
-            {loading && <Spinner color="#690DDD" />}
+            {loading && <Spinner color="white" /> }
             
           </Stack>
         </form>
@@ -186,7 +199,7 @@ export default function Matchmaking() {
       {/* Professors List */}
       {professors.length > 1 && (
         <Box mt={4} p={8}>
-          <Heading as="h2" size="md" color="#690DDD">Professores sugeridos</Heading>
+          <Heading as="h2" size="md" color="#DC143C" fontSize={'4xl'} >Professores sugeridos</Heading>
           <Stack spacing={4} mt={4}>
             {professors.map((professor) => (
               <Box
@@ -194,7 +207,7 @@ export default function Matchmaking() {
                 p="4"
                 borderWidth="1px"
                 borderRadius="16px"
-                bg="rgba(255, 255, 255, 0.1)"
+                bg="black"
                 backdropFilter="blur(10px)"
                 border="1px solid rgba(255, 255, 255, 0.2)"
                 boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
@@ -210,14 +223,17 @@ export default function Matchmaking() {
                       border="2px solid #0E9C8B"
                     />
                   )}
-                  <Box>
-                    <Heading as="h4" size="md" color="#690DDD">
+                  <Box p='3' textAlign="center">
+                    <Heading as="h4" size="md" color="#DC143C">
                       {professor.metadata?.name || 'Nome não disponível'}
                     </Heading>
-                    <Text color="#FFFFFF">Email: {professor.metadata?.email || 'N/A'}</Text>
-                    <Text color="#FFFFFF">Área de Pesquisa: {professor.metadata?.research_area || 'N/A'}</Text>
-                    <Text color="#FFFFFF">Descrição: {professor.metadata?.description || 'N/A'}</Text>
-                    <Text color="#FFFFFF" fontStyle="italic">
+                    <Text color="#fff">Email: {professor.metadata?.email || 'N/A'}</Text>
+                    <br />
+                    <Text color="#fff">Área de Pesquisa: {professor.metadata?.research_area || 'N/A'}</Text>
+                    <Text color="#fff">Descrição: {professor.metadata?.description || 'N/A'}</Text>
+                    <br />
+
+                    <Text color="#fff" fontStyle="italic">
                       Motivo: {professor.metadata?.reasoning || 'N/A'}
                     </Text>
                   </Box>

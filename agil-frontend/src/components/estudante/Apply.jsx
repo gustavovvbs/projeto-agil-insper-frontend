@@ -40,9 +40,9 @@ export default function Apply({ onClose }) {
 
   const fetchProjeto = async () => {
     try {
-      const projetoResponse = await axios.get(`http://127.0.0.1:5000/projeto/${projetoId}`);
+      const projetoResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/projeto/${projetoId}`);
       if (projetoResponse.status === 200) {
-        const professorResponse = await axios.get(`http://127.0.0.1:5000/professor/${projetoResponse.data.professor}`);
+        const professorResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/professor/${projetoResponse.data.professor}`);
         projetoResponse.data.professorName = professorResponse.data.nome;
         setProjeto(projetoResponse.data);
       } else {
@@ -56,7 +56,7 @@ export default function Apply({ onClose }) {
 
   const getStudent = async (estudanteId) => {
     try {
-      const studentResponse = await axios.get(`http://127.0.0.1:5000/estudante/${estudanteId}`);
+      const studentResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/estudante/${estudanteId}`);
       if (studentResponse.status === 200) {
         setEstudanteData(studentResponse.data);
       } else {
@@ -96,7 +96,7 @@ export default function Apply({ onClose }) {
 
     try {
       setLoading(true);
-      const data = await axios.post('http://127.0.0.1:5000/aplicacao/', formData, {
+      const data = await axios.post('https://projeto-agil-insper-backend.onrender.com/aplicacao/', formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data',

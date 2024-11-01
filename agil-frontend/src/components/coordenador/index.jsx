@@ -21,7 +21,7 @@ export default function Coordenador() {
 
   const getProcessos = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/processo/');
+      const response = await axios.get('https://projeto-agil-insper-backend.onrender.com/processo/');
       if (response.status === 200 && Array.isArray(response.data)) {
         setProcessos(response.data);
         console.log('Fetched processos:', response.data);

@@ -38,7 +38,7 @@ export default function CreateProjetoCoord({ processoId, onClose, refreshProjeto
 
   const fetchProfessores = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/professor');
+      const response = await axios.get('https://projeto-agil-insper-backend.onrender.com/professor');
       setProfessores(response.data);
     } catch (err) {
       setError('Erro ao carregar professores.');
@@ -63,7 +63,7 @@ export default function CreateProjetoCoord({ processoId, onClose, refreshProjeto
     };
 
     try {
-      await axios.post('http://127.0.0.1:5000/projeto/', payload, {
+      await axios.post('https://projeto-agil-insper-backend.onrender.com/projeto/', payload, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${localStorage.getItem('token')}`,

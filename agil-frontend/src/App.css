@@ -2,9 +2,9 @@
 
 /* Apply 'Kumbh Sans' font and global styles */
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 32px; /* 8 * 4px */
+  padding-top: 70px; /* 8 * 4px */
   text-align: center;
   font-family: 'Kumbh Sans', sans-serif;
   background-color: #17191C;

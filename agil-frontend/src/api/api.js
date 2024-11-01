@@ -2,5 +2,5 @@ import axios from 'axios';
 import { useContext } from 'react';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://projeto-agil-insper-backend.onrender.com/'
 })

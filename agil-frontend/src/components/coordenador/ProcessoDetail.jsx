@@ -30,17 +30,17 @@ export default function ProcessoDetail() {
 
   const getProcessoAndProjetos = async () => {
     try {
-      const processoResponse = await axios.get(`http://127.0.0.1:5000/processo/${processoId}`);
+      const processoResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/processo/${processoId}`);
       setProcessoName(processoResponse.data.titulo || 'Processo não nomeado');
 
-      const projetosResponse = await axios.get(`http://127.0.0.1:5000/projeto/processo/${processoId}`, {
+      const projetosResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/projeto/processo/${processoId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
       const projetosData = await Promise.all(
         projetosResponse.data.map(async (projeto) => {
-          const professorResponse = await axios.get(`http://127.0.0.1:5000/professor/${projeto.professor}`);
+          const professorResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/professor/${projeto.professor}`);
           return {
         ...projeto,
         professorName: professorResponse.data.nome,

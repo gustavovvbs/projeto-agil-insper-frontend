@@ -5,7 +5,7 @@ export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
     const login = (event) => {
         event.preventDefault();
-        axios.post('http://localhost:5000/auth/login', {
+        axios.post('https://projeto-agil-insper-backend.onrender.com/auth/login', {
             email: event.target.email.value,
             password: event.target.password.value
         }).then(
