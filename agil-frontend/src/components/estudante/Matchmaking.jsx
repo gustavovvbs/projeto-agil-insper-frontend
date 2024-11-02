@@ -73,10 +73,10 @@ export default function Matchmaking() {
   };
 
   return (
-    <Box fontFamily="Kumbh Sans" color="#fff" bg="linear-gradient(to bottom, #4d0000, #A61300 0%, transparent)" >
+    <Box fontFamily="Kumbh Sans" color="#fff" bg={'#17191C'} >
       {/* Navbar */}
       <Flex
-        bg='rgba(0, 0, 0, 0.3)'
+        bg="#17191C"
         color="#fff"
         px="4"
         py="3"
@@ -102,7 +102,6 @@ export default function Matchmaking() {
         maxW="600px"
         mx="auto"
         p="8"
-        mt="60px"
         borderRadius="16px"
         backdropFilter="blur(10px)"
         bg="rgba(23, 25, 28, 0.6)"
@@ -216,7 +215,7 @@ export default function Matchmaking() {
                 <Stack direction="row" spacing={4} align="center">
                   {professor.metadata?.photo_url && (
                     <Image
-                      boxSize="400px"
+                      boxSize="80px"
                       objectFit="cover"
                       src={professor.metadata.photo_url}
                       alt={professor.metadata?.name || 'Professor'}

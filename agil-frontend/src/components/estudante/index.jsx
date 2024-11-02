@@ -1,15 +1,20 @@
+// src/components/estudante/index.jsx
+
 import React, { useState, useEffect } from 'react';
 import {
   Box,
   Heading,
   Text,
   Button,
+  Stack,
   Flex,
   Spinner,
+  IconButton,
   SimpleGrid,
+  Separator,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { FiLogOut } from 'react-icons/fi';
+import { FiLogOut, FiGrid } from 'react-icons/fi';
 import ProjectCard from '../ProjectCard';
 import axios from 'axios';
 
@@ -31,20 +36,22 @@ export default function Estudante() {
       const projetosResponse = await axios.get('https://projeto-agil-insper-backend.onrender.com/projeto');
       if (projetosResponse.status === 200 && Array.isArray(projetosResponse.data)) {
         const projetosData = await Promise.all(
-          projetosResponse.data.map(async (projeto) => {
-            const professorResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/professor/${projeto.professor}`);
-            return {
-              ...projeto,
-              professorName: professorResponse.data.nome,
-              professorEmail: professorResponse.data.email,
-            };
-          })
-        );
+            projetosResponse.data.map(async (projeto) => {
+                const professorResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/professor/${projeto.professor}`);
+                return {
+                    ...projeto,
+                    professorName: professorResponse.data.nome,
+                    professorEmail: professorResponse.data.email,
+                };
+            })
+            );
         setProjetos(projetosData);
-      } else {
+
+    } else {
         console.warn('Unexpected response structure:', response.data);
         setProjetos([]);
       }
+   
     } catch (error) {
       console.error('Error fetching projects:', error);
       setProjetos([]);
@@ -71,61 +78,37 @@ export default function Estudante() {
   }
 
   return (
-    <Box
-      width="100vw"
-      height="100vh"
-      p={8}
-      borderRadius="xl"
-      // backgroundColor="rgba(220, 220, 220, 0.1)" // Light transparent background for frosted effect
-      backdropFilter="blur(15px)" // Blur effect for frosted glass
-      boxShadow="lg" // Adds a soft shadow
-      m="auto"
-      size='full'
-    >
+    <Box p={8}>
       {/* Navbar */}
-<Flex
-  justify='space-between'
-  align='center'
-  mb={8}
-  px={6}
-  py={4}
+      <Flex justify='space-between' align='center' mb={8}>
+        <Heading as='h1' size='lg' color='green.500'>
+          SciConnect
+        </Heading>
+        <Flex align='center'>
+          <Button
+            eftIcon={<FiLogOut />}
+            colorScheme='red'
+            variant='solid'
+            onClick={openOtherPage}
+          >
+            Matchmaking
+          </Button>
+          <Button
+            leftIcon={<FiLogOut />}
+            colorScheme='red'
+            variant='solid'
+            onClick={logout}
+          >
+            Logout
+          </Button>
+        </Flex>
+      </Flex>
 
-  borderRadius="md" // Rounded corners
-  boxShadow="lg" // Soft shadow for depth
->
-  <Heading as='h1' size='4xl' color="white">
-    SciConnect
-  </Heading>
-  <Flex align='center'>
-    <Button
-      colorScheme='red'
-      variant='solid'
-      onClick={openOtherPage}
-      leftIcon={<FiLogOut />}
-      ml={4}
-      size="lg" // Slightly larger buttons to match the header's importance
-      _hover={{ bg: 'red.600' }} // Darker red on hover
-    >
-      Matchmaking
-    </Button>
-    <Button
-      leftIcon={<FiLogOut />}
-      colorScheme='red'
-      variant='solid'
-      onClick={logout}
-      ml={4}
-      size="lg"
-      _hover={{ bg: 'red.600' }} // Darker red on hover
-    >
-      Logout
-    </Button>
-  </Flex>
-</Flex>
-      
       {/* Page Heading */}
-      <Heading as='h2' size='5xl' mb={12} mt={5} textAlign='center' color="gray.100" fontWeight={'bold'}>
+      <Heading as='h2' size='6xl' mb={6} textAlign='left'>
         Projetos Disponíveis
       </Heading>
+      <Separator mb={6} />
 
       {/* Projects List */}
       {projetos.length > 0 ? (
@@ -135,9 +118,7 @@ export default function Estudante() {
           ))}
         </SimpleGrid>
       ) : (
-        <Text color="gray.300" fontSize="xl" textAlign="center">
-          No projects available at the moment.
-        </Text>
+        <Text>No projects available at the moment.</Text>
       )}
     </Box>
   );
