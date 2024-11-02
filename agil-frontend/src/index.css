@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Kumbh Sans', sans-serif;
-  background: linear-gradient(0deg, rgba(10, 10, 10, 1) 0%, rgba(30, 30, 30, 1) 70%, rgba(50, 0, 0, 1) 100%);
+  background: linear-gradient(0deg, rgba(10, 10, 10, 1) 80%, rgba(30, 30, 30, 1) 90%, rgba(50, 0, 0, 1) 100%);
   color: #FFFFFF; /* Branco */
 }
 

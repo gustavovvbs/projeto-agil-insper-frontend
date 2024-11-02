@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react';
 import {
   Box,
   Button,
-  Grid,
-  GridItem,
+  VStack,
   Input,
-  Stack,
   Text,
   Heading,
   Spinner,
+  Flex,
 } from '@chakra-ui/react';
 import { CloseButton } from '../ui/close-button';
+import {
+  FileInput,
+  FileUploadClearTrigger,
+  FileUploadLabel,
+  FileUploadRoot
+} from '../ui/file-button';
 import axios from 'axios';
 import decodeToken from '../../utils/decodeToken';
-import Overlay from '../Overlay';
 import { useParams, useNavigate } from 'react-router-dom';
 
-export default function Apply({ onClose }) {
+export default function Apply() {
   const [projeto, setProjeto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState(null);
@@ -33,10 +37,10 @@ export default function Apply({ onClose }) {
       const decoded = decodeToken(token);
       const estudanteId = decoded.user_id;
       getStudent(estudanteId);
+    } else {
+      navigate('/login');
     }
   }, []);
-
-
 
   const fetchProjeto = async () => {
     try {
@@ -84,7 +88,7 @@ export default function Apply({ onClose }) {
       setSuccessMessage('Selecione um arquivo para enviar.');
       return;
     }
-  
+
     const formData = new FormData();
     formData.append('aplicacao_pdf', file);
     formData.append('projeto', projetoId);
@@ -102,12 +106,10 @@ export default function Apply({ onClose }) {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(data);
-      if (data.status === 200 || data.status === 201){
+      if (data.status === 200 || data.status === 201) {
         setSuccessMessage('Sua aplicação foi enviada com sucesso.');
       }
     } catch (err) {
-        console.log(err)
       const errorMessage = err.response?.data?.message;
       setSuccessMessage(errorMessage);
     } finally {
@@ -116,11 +118,23 @@ export default function Apply({ onClose }) {
   };
 
   const handleClose = () => {
-    navigate('/estudante'); // Navigate to '/estudante' when closing the overlay
+    navigate('/estudante');
   };
 
   return (
-    <Overlay onClose={handleClose}>
+    <Box
+      as="form"
+      onSubmit={handleSubmit}
+      mx="auto"
+      p={8}
+      mt={10}
+      color="white"
+      bg="rgba(255, 255, 255, 0.1)" // Translucent background
+      boxShadow="lg"
+      borderRadius="lg"
+      border="1px solid rgba(255, 255, 255, 0.2)"
+      backdropFilter="blur(15px)"
+    >
       <CloseButton
         position="absolute"
         top="2"
@@ -128,70 +142,69 @@ export default function Apply({ onClose }) {
         color="white"
         onClick={handleClose}
       />
-      <Box
-        as="form"
-        onSubmit={handleSubmit}
-        p={6}
-        maxW="800px"
-        mx="auto"
-        color="black"
-        boxShadow="md"
-        borderRadius="md"
+
+      <Flex
+        align="center"
+        justify="space-between"
+        p="4"
+        borderBottom="1px solid rgba(255, 255, 255, 0.2)"
+        mb="8"
       >
-        <Grid templateColumns={['1fr', null, '1fr 1fr']} gap={6}>
-          {/* Left Column */}
-          <GridItem>
-            <Stack spacing={4}>
-              <Heading as="h2" size="lg">Detalhes do Projeto</Heading>
-              <Box>
-                <Text fontWeight="bold">Título do Projeto:</Text>
-                <Text>{projeto?.titulo}</Text>
-              </Box>
-              <Box>
-                <Text fontWeight="bold">Professor Responsável:</Text>
-                <Text>{projeto?.professorName}</Text>
-              </Box>
-              <Box>
-                <Text fontWeight="bold">Descrição:</Text>
-                <Text>{projeto?.descricao}</Text>
-              </Box>
-            </Stack>
-          </GridItem>
-          {/* Right Column */}
-          <GridItem>
-            <Stack spacing={4}>
-              <Heading as="h2" size="lg">Enviar Aplicação</Heading>
-              <Input
-                type="file"
-                onChange={handleFileChange}
-                accept=".pdf"
-                required
-              />
-              <Input
-                placeholder="Link do Currículo Lattes"
-                type='url'
-                value={estudanteLattes}
-                onChange={(e) => setEstudanteLattes(e.target.value)}
-                required 
-              />
-              <Button
-                mt={4}
-                colorScheme="blue"
-                isLoading={loading}
-                type="submit"
-              >
-                Enviar
-              </Button>
-              {loading && <Spinner size="lg" mt={4} />}
-              {successMessage && (
-                <Box mt={4} p={3} bg="green.100" borderRadius="md">
-                  <Text color="green.800">{successMessage}</Text>
-                </Box>
-              )}
-            </Stack>
-          </GridItem>
-        </Grid>
-      </Box>
-    </Overlay>
+        <Heading as="h2" size="lg" color="white">Sciconnet</Heading>
+        <Flex gap="4">
+          <Button variant="ghost" color="white" onClick={() => navigate('/matchmaking')}>Matchmaking</Button>
+          <Button variant="ghost" color="white" onClick={() => navigate('/logout')}>Logout</Button>
+        </Flex>
+      </Flex>
+
+      <VStack spacing={6} align="stretch">
+        <Box textAlign="center">
+          <Heading as="h2" size="md" color="gray.300">Detalhes do Projeto</Heading>
+          <Text color="white" mt={2}><strong>Título do Projeto:</strong> {projeto?.titulo}</Text>
+          <Text color="white" mt={2}><strong>Professor Responsável:</strong> {projeto?.professorName}</Text>
+          <Text color="white" mt={2}><strong>Descrição:</strong> {projeto?.descricao}</Text>
+        </Box>
+
+        <Box textAlign="center" pt={4} borderTop="1px solid rgba(255, 255, 255, 0.2)">
+          <Heading as="h2" size="md" color="gray.300">Enviar Aplicação</Heading>
+          <Input
+            type="file"
+            onChange={handleFileChange}
+            accept=".pdf"
+            mt={3}
+            bg="rgba(255, 255, 255, 0.1)"
+            color="white"
+            _hover={{ borderColor: "gray.300" }}
+          />
+          <Input
+            placeholder="Link do Currículo Lattes"
+            type="url"
+            value={estudanteLattes}
+            onChange={(e) => setEstudanteLattes(e.target.value)}
+            mt={4}
+            bg="rgba(255, 255, 255, 0.1)"
+            color="white"
+            _hover={{ borderColor: "gray.300" }}
+          />
+          <Button
+            mt={6}
+            colorScheme="gray"
+            isLoading={loading}
+            type="submit"
+            _hover={{
+              bg: 'gray.500',
+            }}
+          >
+            Enviar
+          </Button>
+          {loading && <Spinner size="lg" mt={4} color="gray.300" />}
+          {successMessage && (
+            <Box mt={4} p={3} bg="rgba(76, 175, 80, 0.2)" borderRadius="md">
+              <Text color="white">{successMessage}</Text>
+            </Box>
+          )}
+        </Box>
+      </VStack>
+    </Box>
   );
 }

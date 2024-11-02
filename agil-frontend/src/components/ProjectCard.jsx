@@ -1,5 +1,3 @@
-// src/components/ProjectCard.jsx
-
 import React from 'react';
 import {
   Box,
@@ -23,10 +21,9 @@ export default function ProjectCard({ project, role }) {
     <Box
       p={6}
       borderRadius="lg"
-      boxShadow="lg"
-      borderWidth="1px"
-      borderColor="rgba(255, 255, 255, 0.1)"
-      bgGradient="linear(to-br, gray.800, gray.700)" // Subtle color variation with gradient
+      backgroundColor="rgba(255, 255, 255, 0.08)" // Light transparent background for each card
+      backdropFilter="blur(10px)" // Frosted glass effect
+      boxShadow="md"
       _hover={{
         transform: "scale(1.06)",
         transition: "all 0.2s",
@@ -35,10 +32,10 @@ export default function ProjectCard({ project, role }) {
       }}
     >
       <VStack spacing={4} align="start">
-        <Heading as="h2" size="4xl" color="gray.100" fontWeight="bold">
+        <Heading as="h2" size='4xl' color="gray.100" fontWeight="bold">
           {project.titulo || 'Project Title'}
         </Heading>
-        <Text color="gray.400">
+        <Text color="gray.300">
           <span>Professor: {project.professorName}</span>
           <br />
           <span>Descrição: {project.descricao || 'Description of the project.'}</span>
@@ -48,7 +45,7 @@ export default function ProjectCard({ project, role }) {
             {project.topics.map((topic, index) => (
               <Badge
                 key={index}
-                bg="red.500"
+                bg="rgba(255, 255, 255, 0.2)" // Transparent badge color
                 color="white"
                 borderRadius="full"
                 px={3} 
@@ -62,13 +59,12 @@ export default function ProjectCard({ project, role }) {
         {role === 'estudante' && (
           <Button
             onClick={handleApply}
-            backdropBlur="3xl"
-            bgColor="whiteAlpha.200"
+            bgColor="whiteAlpha.300"
             color="white"
             _hover={{
-              bgColor: "whiteAlpha.400",
-              transform: "scale(1.05)", // Slightly scale button on hover
-              boxShadow: "md", // Soft shadow on hover
+              bgColor: "whiteAlpha.500",
+              transform: "scale(1.05)", 
+              boxShadow: "md", 
             }}
           >
             Aplicar
