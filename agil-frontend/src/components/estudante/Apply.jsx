@@ -25,6 +25,7 @@ export default function Apply({ onClose }) {
   const [successMessage, setSuccessMessage] = useState('');
   const { projetoId } = useParams();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchProjeto();
@@ -49,8 +50,9 @@ export default function Apply({ onClose }) {
         setSuccessMessage('Projeto não encontrado.');
       }
     } catch (err) {
-      const errorMessage = err.response?.data?.message || 'Erro ao carregar projeto.';
+      const errorMessage = err.response?.data?.message || 'Erro ao carregar projeto';
       setSuccessMessage(errorMessage);
+      setErrorMessage(errorMessage);
     }
   };
 
@@ -128,20 +130,22 @@ export default function Apply({ onClose }) {
         color="black"
         onClick={handleClose}
       />
-      <Heading as='h1' size='lg' fontSize='3xl' marginLeft='-360px' marginTop='-110px' position = 'absolute'>
+      <Heading as='h1' size='lg' fontSize='3xl' marginLeft='-360px' marginTop='-90px' position = 'absolute'>
             <Text as="span" color="red.500">Sci</Text>
             <Text as="span" color="white">Connect</Text>
-        </Heading>
+      </Heading>
       <Box
         as="form"
         onSubmit={handleSubmit}
-        p={6}
+        p={10}
         maxW="800px"
         mx='-10'
         my='12'
-        color="black"
-        boxShadow="md"
+        color="red.700"
+        boxShadow='md'
+        boxShadowColor='red.200'
         borderRadius="md"
+        bg="gray.500"
       >
         <Heading as='h1' size='3xl' color='black.500' marginBottom = '40px' fontWeight="bold">
           Detalhes do Projeto
@@ -153,17 +157,14 @@ export default function Apply({ onClose }) {
               <Box>
                 <Heading as="h3" size="xl">Título do Projeto:</Heading>
                 <Text>{projeto?.titulo}</Text>
-                <Text>Titiulo</Text>
               </Box>
               <Box>
               <Heading as="h3" size="xl">Nome do Professor: </Heading>
                 <Text>{projeto?.professorName}</Text>
-                <Text>Proff</Text>
               </Box>
               <Box>
               <Heading as="h3" size="xl">Descrição do Projeto:</Heading>
                 <Text>{projeto?.descricao}</Text>
-                <Text>Desc</Text>
               </Box>
             </Stack>
           </GridItem>
@@ -190,12 +191,17 @@ export default function Apply({ onClose }) {
                 isLoading={loading}
                 type="submit"
               >
-                Enviar
+              Enviar
               </Button>
               {loading && <Spinner size="lg" mt={4} />}
               {successMessage && (
                 <Box mt={4} p={3} bg="green.100" borderRadius="md">
                   <Text color="green.800">{successMessage}</Text>
+                </Box>
+              )}
+              {errorMessage && (
+                <Box mt={4} p={3} bg="red.100" borderRadius="md">
+                  <Text color="red.800">{errorMessage}</Text>
                 </Box>
               )}
             </Stack>
