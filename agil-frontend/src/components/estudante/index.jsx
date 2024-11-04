@@ -12,6 +12,8 @@ import {
   IconButton,
   SimpleGrid,
   Separator,
+  VStack,
+  useBreakpointValue
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { FiLogOut, FiGrid } from 'react-icons/fi';
@@ -78,18 +80,27 @@ export default function Estudante() {
   }
 
   return (
-    <Box p={8}>
+    <Box
+    p={8}
+    bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)"
+    minHeight='100vh'
+    >
       {/* Navbar */}
       <Flex justify='space-between' align='center' mb={8}>
-        <Heading as='h1' size='lg' color='green.500'>
-          SciConnect
+      <div class='header'>
+        <Heading as='h1' size='lg' fontSize='3xl'>
+            <Text as="span" color="red.500">Sci</Text>
+            <Text as="span" color="white">Connect</Text>
         </Heading>
-        <Flex align='center'>
+      </div>
+        <Flex align='center' gap='12px'>
           <Button
             eftIcon={<FiLogOut />}
             colorScheme='red'
             variant='solid'
             onClick={openOtherPage}
+            _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -2px 6px rgba(255, 0, 0)" }}
+            boxShadow='2px 2px 2px 0px rgba(0, 0, 0, 0.5)'
           >
             Matchmaking
           </Button>
@@ -98,6 +109,8 @@ export default function Estudante() {
             colorScheme='red'
             variant='solid'
             onClick={logout}
+            _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -2px 6px rgba(255, 0, 0)" }}
+            boxShadow='3px 3px 3px 0px rgba(0, 0, 0, 0.5)'
           >
             Logout
           </Button>
@@ -105,11 +118,11 @@ export default function Estudante() {
       </Flex>
 
       {/* Page Heading */}
-      <Heading as='h2' size='6xl' mb={6} textAlign='left'>
+      <Heading as='h2' size='4xl' mb={6} textAlign='center'>
         Projetos Disponíveis
       </Heading>
-      <Separator mb={6} />
-
+      <br />
+      <br />
       {/* Projects List */}
       {projetos.length > 0 ? (
         <SimpleGrid columns={[1, 2, 3]} spacing={6} columnGap={10} rowGap={10}>
