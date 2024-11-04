@@ -125,42 +125,52 @@ export default function Apply({ onClose }) {
         position="absolute"
         top="2"
         right="2"
-        color="white"
+        color="black"
         onClick={handleClose}
       />
+      <Heading as='h1' size='lg' fontSize='3xl' marginLeft='-360px' marginTop='-110px' position = 'absolute'>
+            <Text as="span" color="red.500">Sci</Text>
+            <Text as="span" color="white">Connect</Text>
+        </Heading>
       <Box
         as="form"
         onSubmit={handleSubmit}
         p={6}
         maxW="800px"
-        mx="auto"
+        mx='-10'
+        my='12'
         color="black"
         boxShadow="md"
         borderRadius="md"
       >
+        <Heading as='h1' size='3xl' color='black.500' marginBottom = '40px' fontWeight="bold">
+          Detalhes do Projeto
+        </Heading>
         <Grid templateColumns={['1fr', null, '1fr 1fr']} gap={6}>
           {/* Left Column */}
           <GridItem>
             <Stack spacing={4}>
-              <Heading as="h2" size="lg">Detalhes do Projeto</Heading>
               <Box>
-                <Text fontWeight="bold">Título do Projeto:</Text>
+                <Heading as="h3" size="xl">Título do Projeto:</Heading>
                 <Text>{projeto?.titulo}</Text>
+                <Text>Titiulo</Text>
               </Box>
               <Box>
-                <Text fontWeight="bold">Professor Responsável:</Text>
+              <Heading as="h3" size="xl">Nome do Professor: </Heading>
                 <Text>{projeto?.professorName}</Text>
+                <Text>Proff</Text>
               </Box>
               <Box>
-                <Text fontWeight="bold">Descrição:</Text>
+              <Heading as="h3" size="xl">Descrição do Projeto:</Heading>
                 <Text>{projeto?.descricao}</Text>
+                <Text>Desc</Text>
               </Box>
             </Stack>
           </GridItem>
           {/* Right Column */}
           <GridItem>
             <Stack spacing={4}>
-              <Heading as="h2" size="lg">Enviar Aplicação</Heading>
+              <Heading as="h2" size="2xl">Enviar Aplicação</Heading>
               <Input
                 type="file"
                 onChange={handleFileChange}
