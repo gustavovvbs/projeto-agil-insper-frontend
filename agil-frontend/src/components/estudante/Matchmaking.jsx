@@ -28,7 +28,11 @@ export default function Matchmaking() {
   const [professors, setProfessors] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showMore, setShowMore] = useState(false);
 
+  const toggleShowMore = () => {
+    setShowMore(!showMore);
+}
   const navigate = useNavigate()
 
   const goToProjetos = () => {
@@ -73,40 +77,38 @@ export default function Matchmaking() {
   };
 
   return (
-    <Box fontFamily="Kumbh Sans" color="#fff" bg={'#17191C'} >
-      {/* Navbar */}
+    <Box fontFamily="Kumbh Sans" color="#fff" bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)" minHeight="100vh" >
       <Flex
-        bg="#17191C"
         color="#fff"
         px="4"
         py="3"
         align="center"
         gap="80%"
-        position="fixed"
+        position="relative"
         top="0"
         width="100%"
         zIndex="1000"
-        boxShadow="0 4px 6px rgba(0, 0, 0, 0.1)"
       >
-        <Heading size="4xl" color="#DC143C">SciConnect</Heading>
+        <Heading as='h1' size='lg' fontSize='3xl'>
+            <Text as="span" color="red.500">Sci</Text>
+            <Text as="span" color="white">Connect</Text>
+        </Heading>
         <Button as={Link} to="/estudante" color="#DC143C" variant="outline" borderColor={'#808080'} _hover={{ bg: "FFFFF" }} onClick={goToProjetos}>
           Ver Projetos
         </Button>
       </Flex>
 
-      {/* Spacer to prevent content from being hidden behind navbar */}
-      <Box height="60px"/>
-
-      {/* Form Container with Glassmorphism */}
+      <br />
       <Box
         maxW="600px"
         mx="auto"
         p="8"
+        mt="60px"
         borderRadius="16px"
         backdropFilter="blur(10px)"
         bg="rgba(23, 25, 28, 0.6)"
-        boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-        border="1px solid rgba(255, 255, 255, 0.3)"
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)"
+
       >
         <form onSubmit={handleSubmit}>
           <Stack spacing={8}>
@@ -194,51 +196,69 @@ export default function Matchmaking() {
             
           </Stack>
         </form>
-      </Box>
+      </Box> 
+      <br />
+      <br />
+      <br />
 
-      {/* Professors List */}
       {professors.length > 1 && (
-        <Box mt={4} p={8}>
-          <Heading as="h2" size="md" color="#DC143C" fontSize={'4xl'} >Professores sugeridos</Heading>
-          <Stack spacing={4} mt={4}>
-            {professors.map((professor) => (
-              <Box
-                key={professor.id}
-                p="4"
-                borderWidth="1px"
-                borderRadius="16px"
-                bg="black"
-                backdropFilter="blur(10px)"
-                border="1px solid rgba(255, 255, 255, 0.2)"
-                boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-              >
-                <Stack direction="row" spacing={4} align="center">
-                  {professor.metadata?.photo_url && (
-                    <Image
-                      boxSize="80px"
-                      objectFit="cover"
-                      src={professor.metadata.photo_url}
-                      alt={professor.metadata?.name || 'Professor'}
-                      borderRadius="full"
-                      border="2px solid #0E9C8B"
-                    />
-                  )}
-                  <Box p='3' textAlign="center">
-                    <Heading as="h4" size="md" color="#DC143C">
-                      {professor.metadata?.name || 'Nome não disponível'}
-                    </Heading>
-                    <Text color="#fff">Email: {professor.metadata?.email || 'N/A'}</Text>
-                    <br />
-                    <Text color="#fff">Área de Pesquisa: {professor.metadata?.research_area || 'N/A'}</Text>
-                    <Text color="#fff">Descrição: {professor.metadata?.description || 'N/A'}</Text>
-                    <br />
-
-                    <Text color="#fff" fontStyle="italic">
-                      Motivo: {professor.metadata?.reasoning || 'N/A'}
-                    </Text>
-                  </Box>
-                </Stack>
+      <Box mt={4} p={8}>
+        <Flex alignItems="center" justifyContent="center" textAlign="center">
+          <Heading as="h1" size="md" color="#fff" fontSize="4xl">
+            Professores sugeridos
+          </Heading>
+        </Flex>
+        <br />
+        <br />
+        <br />
+        <Stack spacing={8} mt={4}>
+          {professors.map((professor) => (
+            <Box
+            p="4"
+            W="90%"
+            mx="auto"
+            minW='50%'
+            borderWidth="1px"
+            borderRadius="16px"
+            bg="black"
+            backdropFilter="blur(10px)"
+            border="1px solid rgba(255, 255, 255, 0.2)"
+            boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
+          >
+            <Stack spacing={4} align="center">
+              {professor.metadata?.photo_url && (
+                <Image
+                  boxSize="200px"
+                  objectFit="cover"
+                  src={professor.metadata.photo_url}
+                  alt={professor.metadata?.name || 'Professor'}
+                  borderRadius="full"
+                  border="2px solid #0E9C8B"
+                />
+              )}
+              <Box p="3" textAlign="center">
+                <Heading as="h4" size="md" color="#DC143C" fontSize='30px'>
+                  {professor.metadata?.name || 'Nome não disponível'}
+                </Heading>
+                <br />
+                <Text color="#fff" fontSize='15px'>Email: {professor.metadata?.email || 'N/A' }</Text>
+                <br />
+                <Text color="#fff" fontSize='15px'>Área de Pesquisa: {professor.metadata?.research_area || 'N/A'}</Text>
+                <br />
+                <Text color="#fff" fontSize='15px'>
+                  Descrição: {showMore ? professor.metadata?.description || 'N/A' : `${(professor.metadata?.description || 'N/A').slice(0, 50)}...`}
+                </Text>
+                <br />
+                <Text color="#fff" fontStyle="italic" fontSize='15px'>
+                  Motivo: {showMore ? professor.metadata?.reasoning || 'N/A' : `${(professor.metadata?.reasoning || 'N/A').slice(0, 50)}...`}
+                </Text>
+      
+                <Button colorScheme="teal" size="sm" onClick={toggleShowMore} mt={3}>
+                  {showMore ? 'Ver menos' : 'Ver mais'}
+                </Button>
               </Box>
+            </Stack>
+          </Box>
             ))}
           </Stack>
         </Box>

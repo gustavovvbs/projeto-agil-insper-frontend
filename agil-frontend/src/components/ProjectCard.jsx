@@ -22,19 +22,18 @@ export default function ProjectCard({ project, role }) {
 
   return (
     <Box
-      borderWidth='1px'
       borderRadius='lg'
       overflow='hidden'
-      p={6}
-      bg='white'
-      boxShadow='md'
-      _hover={{ boxShadow: 'xl' }}
+      p={3}
+      bg='#171717'
+      _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)" }}
+      boxShadow='10px 10px 10px 0 rgba(0, 0, 0, 0.5)'
     >
       <VStack spacing={4} align='start'>
-        <Heading as='h3' size='md' color='green.600'>
+        <Heading as='h3' size='md' color='white' fontSize='20px'>
           {project.titulo|| 'Project Title'}
         </Heading>
-        <Text color='gray.600'>
+        <Text color='whiteAlpha.800' fontSize='10px'>
           <p>Professor: {project.professorName}</p>
           <p>Descrição: {project.descricao || 'Description of the project.'}</p>
         </Text>
@@ -49,7 +48,7 @@ export default function ProjectCard({ project, role }) {
         )}
 
         {role === 'estudante' && (
-            <Button colorScheme='green' onClick={handleApply}>
+            <Button colorScheme='green' onClick={handleApply} bg='#575757' height={'34px'} boxShadow='2px 2px 2px 0px rgba(0, 0, 0, 0.5)' _hover={{ bg: 'whiteAlpha.900',  color: 'black'}}>
             Aplicar
           </Button>
         )}

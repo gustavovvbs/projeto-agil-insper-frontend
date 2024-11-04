@@ -1,15 +1,7 @@
 /* Refactored App.css following the Mini Style Guide */
 
 /* Apply 'Kumbh Sans' font and global styles */
-#root {
-  max-width: 100%;
-  margin: 0 auto;
-  padding-top: 70px; /* 8 * 4px */
-  text-align: center;
-  font-family: 'Kumbh Sans', sans-serif;
-  background-color: #17191C;
-  color: #FFFFFF;
-}
+
 
 /* Logo styling with Glassmorphism and Neon Lights */
 .logo {
@@ -40,4 +32,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.login-wrapper{
+  color: #ffffff;
 }
