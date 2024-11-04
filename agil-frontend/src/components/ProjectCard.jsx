@@ -24,10 +24,13 @@ export default function ProjectCard({ project, role }) {
     <Box
       borderRadius='lg'
       overflow='hidden'
-      p={3}
+      p={6}
       bg='#171717'
-      _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)" }}
+      _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)", transform: "scale(1.06)",
+        transition: "all 0.2s",}}
       boxShadow='10px 10px 10px 0 rgba(0, 0, 0, 0.5)'
+      backgroundColor="rgba(255, 255, 255, 0.2)" // Light transparent background for each card
+
     >
       <VStack spacing={4} align='start'>
         <Heading as='h3' size='md' color='white' fontSize='20px'>
