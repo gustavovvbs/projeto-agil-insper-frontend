@@ -74,6 +74,7 @@ return (
           </Button>
         </Flex>
 
+
         <Separator my={3} />
           <Flex justifyContent="space-between" alignItems="center" mb={4}>
           <Heading as="h3" size="md">Processos</Heading>
@@ -84,7 +85,7 @@ return (
             boxShadow='3px 3px 3px 0px rgba(0, 0, 0, 0.5)'
             onClick={() => setIsCreatingProjeto(true)}
           >
-            Criar Processo
+            Criar Projeto
           </Button>
         </Flex>
         <Separator my={4}/>

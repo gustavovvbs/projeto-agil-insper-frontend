@@ -24,7 +24,7 @@ export default function Login() {
             if (role === 'coordenador') {
                 window.location.href = '/coordenador';
             } else if (role === 'professor') {
-                window.location.href = '/professor';
+                window.location.href = '/professor/professorId';
             } else if (role === 'estudante') {
                 window.location.href = '/estudante';
             }

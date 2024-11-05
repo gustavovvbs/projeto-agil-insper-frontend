@@ -157,11 +157,10 @@ export default function CreateProjetoCoord({ processoId, onClose, refreshProjeto
                     <NativeSelectRoot>
                       <NativeSelectField
                         name="temas"
-                        multiple
                         value={temasSelecionados}
                         onChange={(e) =>
                           setTemasSelecionados(
-                            Array.from(e.target.selectedOptions, (option) => option.value)
+                            Array.from(e.target.selectedOptions, (option) => option.value )
                           )
                         }
                         items={temasOptions.map((tema) => ({
