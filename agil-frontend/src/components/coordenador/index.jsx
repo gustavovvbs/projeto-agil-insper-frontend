@@ -64,7 +64,7 @@ return (
             <Heading size="6xl">
                 Processos
             </Heading>
-            <Button as={Link} to="create-processo" colorScheme="green">
+            <Button as={Link} to="http://localhost:5173/processo" colorScheme="green">
                 Criar Processo
             </Button>
         </Flex>
