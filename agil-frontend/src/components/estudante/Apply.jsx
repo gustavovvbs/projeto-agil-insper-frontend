@@ -131,7 +131,7 @@ export default function Apply({ onClose }) {
       <Heading as='h1' size='lg' fontSize='3xl' marginLeft='-360px' marginTop='-110px' position = 'absolute'>
             <Text as="span" color="red.500">Sci</Text>
             <Text as="span" color="white">Connect</Text>
-        </Heading>
+      </Heading>
       <Box
         as="form"
         onSubmit={handleSubmit}
@@ -153,17 +153,14 @@ export default function Apply({ onClose }) {
               <Box>
                 <Heading as="h3" size="xl">Título do Projeto:</Heading>
                 <Text>{projeto?.titulo}</Text>
-                <Text>Titiulo</Text>
               </Box>
               <Box>
               <Heading as="h3" size="xl">Nome do Professor: </Heading>
                 <Text>{projeto?.professorName}</Text>
-                <Text>Proff</Text>
               </Box>
               <Box>
               <Heading as="h3" size="xl">Descrição do Projeto:</Heading>
                 <Text>{projeto?.descricao}</Text>
-                <Text>Desc</Text>
               </Box>
             </Stack>
           </GridItem>
