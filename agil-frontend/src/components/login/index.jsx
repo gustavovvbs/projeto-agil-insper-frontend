@@ -43,7 +43,7 @@ export default function Login() {
             display="flex"
             alignItems="center"
             justifyContent="center"
-            color="#fff"
+            color="#000000"
 
         >
             
@@ -57,7 +57,7 @@ export default function Login() {
                 maxWidth="400px"
                 textAlign="center"
             >
-                <h1 style={{ fontSize: '30px', fontWeight: 'bold', marginBottom: '5px' }}>Please Log In</h1>
+                <h1 style={{ fontSize: '30px', fontWeight: 'bold', marginBottom: '5px', color:'#fff'}}>Please Log In</h1>
                 <br />
                 {errorMessage && (
                     <Box className="error-message" color="red.300" mb="4">
@@ -73,7 +73,7 @@ export default function Login() {
                     <br />
                     <label>
                         <p>Password</p>
-                        <input type="password" name="password" style={{ width: '100%', padding: '8px', marginBottom: '16px', borderRadius:"10px" }} />
+                        <input type="password" name="password" style={{ width: '100%', padding: '8px', marginBottom: '16px', borderRadius:"10px", color: 'black' }} />
                     </label>
                     <br />
                     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
