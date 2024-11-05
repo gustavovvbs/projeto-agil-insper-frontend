@@ -41,17 +41,16 @@ export default function Matchmaking() {
 
 
   const fetchProfessores = async () => {
+    setLoading(true);
     try {
         const response = await axios.get('https://projeto-agil-insper-backend.onrender.com/professor');
-        setLoading(true);
       if (response.status !== 200) {
         throw new Error('Erro ao carregar professores.');
       }
       setProfessors(response.data);
-      setLoading(false);
     } catch (err) {
       setError('Erro ao carregar professores.');
-    }
+    } 
   };
 
   const handleSubmit = async (e) => {
@@ -67,12 +66,15 @@ export default function Matchmaking() {
     };
 
     try {
+      setLoading(true)
       const response = await axios.post('https://projeto-agil-insper-backend.onrender.com/matchmaking/query', formData,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
       setProfessors(response.data);
     } catch (error) {
       console.error('Erro ao buscar professores:', error);
       setError('Erro ao buscar professores.');
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -93,7 +95,7 @@ export default function Matchmaking() {
             <Text as="span" color="red.500">Sci</Text>
             <Text as="span" color="white">Connect</Text>
         </Heading>
-        <Button as={Link} to="/estudante" color="#DC143C" variant="outline" borderColor={'#808080'} _hover={{ bg: "FFFFF" }} onClick={goToProjetos}>
+        <Button to="/estudante" color="#DC143C" variant="outline" borderColor={'#808080'} _hover={{ bg: "FFFFF" }} onClick={goToProjetos}>
           Ver Projetos
         </Button>
       </Flex>
@@ -108,6 +110,7 @@ export default function Matchmaking() {
         backdropFilter="blur(10px)"
         bg="rgba(23, 25, 28, 0.6)"
         boxShadow="0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)"
+        position={'relative'}
 
       >
         <form onSubmit={handleSubmit}>
@@ -116,11 +119,11 @@ export default function Matchmaking() {
               Encontre seu Professor
             </Heading>
 
-            <Field label="Tema de seu interesse" isRequired>
+            <Field label="Curso" isRequired>
               <Input
-                value={themeEnjoyed}
-                onChange={(e) => setThemeEnjoyed(e.target.value)}
-                placeholder="Ex: Machine Learning"
+                value={course}
+                onChange={(e) => setCourse(e.target.value)}
+                placeholder="Ex: Engenharia de Software"
                 bg="#4C4F54"
                 color="#FFFFFF"
                 border="1px solid rgba(255, 255, 255, 0.3)"
@@ -128,11 +131,11 @@ export default function Matchmaking() {
               />
             </Field>
 
-            <Field label="Curso" isRequired>
+            <Field label="Tema de seu interesse" isRequired>
               <Input
-                value={course}
-                onChange={(e) => setCourse(e.target.value)}
-                placeholder="Ex: Engenharia de Software"
+                value={themeEnjoyed}
+                onChange={(e) => setThemeEnjoyed(e.target.value)}
+                placeholder="Ex: Machine Learning"
                 bg="#4C4F54"
                 color="#FFFFFF"
                 border="1px solid rgba(255, 255, 255, 0.3)"
@@ -189,10 +192,25 @@ export default function Matchmaking() {
 
             {error && <Text color="#DC143C">{error}</Text>}
 
-            <Button type="submit" onClick={fetchProfessores} colorScheme="brand" size="lg" boxShadow="0 0 10px #DC143C" mt={4}>
+            <Button type="submit" onClick={fetchProfessores} colorScheme="brand" size="lg" boxShadow="0 0 10px #DC143C" mt={4} >
               Encontrar Professores
             </Button>
-            {loading && <Spinner color="white" /> }
+            {loading && (
+              <Flex
+                position="fixed"
+                top="0"
+                left="0"
+                width="100%"
+                height="100%"
+                alignItems="center"
+                borderRadius="16px"
+                justifyContent="center"
+                bg="rgba(0, 0, 0, 0.6)"
+                zIndex="1000"
+              >
+                <Spinner color="white" size="xl" />
+              </Flex>
+            )}
             
           </Stack>
         </form>
@@ -201,7 +219,8 @@ export default function Matchmaking() {
       <br />
       <br />
 
-      {professors.length > 1 && (
+      {professors.length > 1 && ( 
+        
       <Box mt={4} p={8}>
         <Flex alignItems="center" justifyContent="center" textAlign="center">
           <Heading as="h1" size="md" color="#fff" fontSize="4xl">
