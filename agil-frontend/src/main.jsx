@@ -16,12 +16,8 @@ import CreateProcesso from './components/CreateProcesso.jsx';
 import Estudante from './components/estudante/index.jsx';
 import Apply from './components/estudante/Apply.jsx';
 import Matchmaking from './components/estudante/Matchmaking.jsx';
-import Professor from './components/professor/index.jsx';
+import Professor from './components/professor/projetos.jsx';
 const router = createBrowserRouter([
-  {
-    path: '/projeto',
-    element: <Professor />,
-  },
   {
     path: '/professor/:professorId',
     element: <Professor />,
