@@ -111,7 +111,7 @@ export default function Matchmaking() {
         bg="rgba(23, 25, 28, 0.6)"
         boxShadow="0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)"
         position={'relative'}
-
+        
       >
         <form onSubmit={handleSubmit}>
           <Stack spacing={8}>
