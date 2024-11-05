@@ -8,23 +8,20 @@ export default function ProcessoCard({ processo }) {
   return (
     <Link to={`/coordenador/${processo.id}`} style={{ textDecoration: 'none' }}>
       <Box
-        width="100%"
-        maxHeight={500}
-        maxW="500px"
-        p={6}
-        borderWidth="2px"
-        borderRadius="lg"
-        height={300}
-        backdropOpacity={0.2}
-        color="white"
-        _hover={{ transform: 'scale(1.05)', boxShadow: 'lg' }}
-        transition="all 0.2s"
-        textAlign="center"
-        bgGradient="linear(to-b, green.400, green.500)"
-      >
+      borderRadius='lg'
+      overflow='hidden'
+      p={6}
+      bg='#171717'
+      ml={2}
+      mr={2}
+      _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)", transform: "scale(1.06)",
+        transition: "all 0.2s",}}
+      boxShadow='10px 10px 10px 0 rgba(0, 0, 0, 0.5)'
+      backgroundColor="rgba(255, 255, 255, 0.2)" // Light transparent background for each card
+    >
         <Heading         
         textAlign={'left'}
-        size='6xl'>{processo.titulo || 'Processo não nomeado'}</Heading>
+        size='2xl'>{processo.titulo || 'Processo não nomeado'}</Heading>
       </Box>
     </Link>
   );

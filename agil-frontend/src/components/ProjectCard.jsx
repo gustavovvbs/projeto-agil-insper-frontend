@@ -26,6 +26,8 @@ export default function ProjectCard({ project, role }) {
       overflow='hidden'
       p={6}
       bg='#171717'
+      ml={2}
+      mr={2}
       _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)", transform: "scale(1.06)",
         transition: "all 0.2s",}}
       boxShadow='10px 10px 10px 0 rgba(0, 0, 0, 0.5)'
