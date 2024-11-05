@@ -53,7 +53,7 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
-    path: '/processo',
+    path: '/coordenador/create-processo',
     element: <CreateProcesso />
   },
   {

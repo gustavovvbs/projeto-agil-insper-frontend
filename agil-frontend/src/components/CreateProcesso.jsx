@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Input, Stack, Text} from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { createToaster } from '@chakra-ui/react';
+import { createToaster, Heading} from '@chakra-ui/react';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { Link, useHref } from 'react-router-dom';
@@ -55,44 +55,76 @@ export default function CreateProcesso() {
   };
 
   return (
-    <Box as="form" onSubmit={handleSubmit} p={6} maxW="md" mx="auto">
-      <Stack spacing={4}>
-        <Text fontSize="xl" fontWeight="bold">Criar Novo Processo</Text>
+    <Box
+    bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)"
+    minHeight="100vh"
+    >
+      <Heading as='h1' size='lg' fontSize='3xl' marginLeft='30px' marginTop='20px' position = 'absolute'>
+            <Text as="span" color="red.500">Sci</Text>
+            <Text as="span" color="white">Connect</Text>
+      </Heading>
+      <Box as="form"
+      onSubmit={handleSubmit}
+      p={6}
+      maxW="md"
+      mx="auto"
+      position = 'absolute'
+      marginLeft='520px'
+      marginTop = '197px'
+      bg="black"
+      borderRadius='10px'
+      width='1000px'
+      transform="scale(1.2)"
+      boxShadow = "0px 0px 7px rgba(0, 0, 0, 0), 0 -2px 10px rgba(255, 0, 0)"
+      >
+        <Stack spacing={4} color = 'white'>
 
-        {/* Título Field */}
-        <Box>
-          <Text fontWeight="semibold">Título</Text>
-          <Input
-            type="text"
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-            placeholder="Digite o título do processo"
-            required
-          />
-        </Box>
+          <Text fontSize="3xl" fontWeight="bold" marginLeft='63px'>Criar Novo Processo</Text>
 
-        {/* Data Field */}
-        <Box>
-          <Text fontWeight="semibold">Data de Encerramento</Text>
-          <Input
-            type="date"
-            value={data}
-            onChange={(e) => setData(e.target.value)}
-            placeholder="YYYY-MM-DD"
-            required
-          />
-        </Box>
+          {/* Título Field */}
+          <Box marginTop = '10px'>
+            <Text fontWeight="semibold" marginBottom='7px'>Título</Text>
+            <Input
+              type="text"
+              value={titulo}
+              onChange={(e) => setTitulo(e.target.value)}
+              bg = 'white'
+              color = 'black'
+              placeholder="Digite o título do processo"
+              required
+            />
+          </Box>
 
-        {/* Submit Button */}
-        <Button
-          type="submit"
-          colorScheme="blue"
-          isLoading={isSubmitting}
-          loadingText="Enviando"
-        >
-          Criar Processo
-        </Button>
-      </Stack>
+          {/* Data Field */}
+          <Box marginTop = '20px'>
+            <Text fontWeight="semibold" marginBottom='7px'>Data de Encerramento</Text>
+            <Input
+              type="date"
+              value={data}
+              onChange={(e) => setData(e.target.value)}
+              placeholder="YYYY-MM-DD"
+              required
+              color = 'black'
+              bg = 'white'
+            />
+          </Box>
+
+          {/* Submit Button */}
+          <Button
+            type="submit"
+            colorScheme="blue"
+            isLoading={isSubmitting}
+            loadingText="Enviando Processo..."
+            bg = '#28a740'
+            marginTop = '16px'
+            width='50%'
+            marginLeft='100px'
+          >
+            Criar Processo
+          </Button>
+        </Stack>
+      </Box>
     </Box>
-  );
-}
+    );
+  }
+  
