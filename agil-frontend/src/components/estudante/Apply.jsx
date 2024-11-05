@@ -9,11 +9,12 @@ import {
   Text,
   Heading,
   Spinner,
+  Flex,
+  Separator
 } from '@chakra-ui/react';
 import { CloseButton } from '../ui/close-button';
 import axios from 'axios';
 import decodeToken from '../../utils/decodeToken';
-import Overlay from '../Overlay';
 import { useParams, useNavigate } from 'react-router-dom';
 
 export default function Apply({ onClose }) {
@@ -35,8 +36,6 @@ export default function Apply({ onClose }) {
       getStudent(estudanteId);
     }
   }, []);
-
-
 
   const fetchProjeto = async () => {
     try {
@@ -116,73 +115,83 @@ export default function Apply({ onClose }) {
   };
 
   const handleClose = () => {
-    navigate('/estudante'); // Navigate to '/estudante' when closing the overlay
+    navigate('/estudante');
   };
 
   return (
-    <Overlay onClose={handleClose}>
-      <CloseButton
-        position="absolute"
-        top="2"
-        right="2"
-        color="black"
-        onClick={handleClose}
-      />
-      <Heading as='h1' size='lg' fontSize='3xl' marginLeft='-360px' marginTop='-110px' position = 'absolute'>
-            <Text as="span" color="red.500">Sci</Text>
-            <Text as="span" color="white">Connect</Text>
+    <Box fontFamily="Kumbh Sans" color="#fff" bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)" minHeight="100vh" display="flex" flexDirection="column" alignItems="center" justifyContent="center" p={4}>
+      
+      <Flex
+        position="fixed"
+        top={0}
+        left={0}
+        width="100%"
+        p={4}
+        bg="rgba(0, 0, 0, 0)"  
+        zIndex="1000"
+
+      >
+        <Heading as='h1' fontSize='3xl' color="#fff">
+          <Text as="span" color="red.500">Sci</Text>
+          <Text as="span" color="white">Connect</Text>
         </Heading>
+      </Flex>
+
       <Box
+        position="relative"
+        bg="rgba(23, 25, 28, 0.6)"
         as="form"
         onSubmit={handleSubmit}
         p={6}
-        maxW="800px"
-        mx='-10'
-        my='12'
-        color="black"
-        boxShadow="md"
+        maxW="65%"
+        color="white"
+        boxShadow="0px 0px 10px rgba(0, 0, 0, 0.5), 0 -5px 6px rgba(255, 0, 0)"
         borderRadius="md"
+        
+
       >
-        <Heading as='h1' size='3xl' color='black.500' marginBottom = '40px' fontWeight="bold">
-          Detalhes do Projeto
-        </Heading>
+        <Flex justify="space-between" align="center" mb={4}>
+          <Heading as="h1" size="lg" color="white" fontWeight="bold" fontSize={'30px'}>
+            Detalhes do Projeto
+          </Heading>
+          <CloseButton color="white" onClick={handleClose} _hover={{ bg: "#FFFFF", color: '#000000' }}/>
+        </Flex>
         <Grid templateColumns={['1fr', null, '1fr 1fr']} gap={6}>
-          {/* Left Column */}
           <GridItem>
             <Stack spacing={4}>
               <Box>
-                <Heading as="h3" size="xl">Título do Projeto:</Heading>
-                <Text>{projeto?.titulo}</Text>
-                <Text>Titiulo</Text>
+                <Heading as="h3" size="md" fontSize={'20px'}>Título do Projeto:</Heading>
+                <Text fontSize={'15px'}>{projeto?.titulo}</Text>
               </Box>
+              <Separator my={1} />
               <Box>
-              <Heading as="h3" size="xl">Nome do Professor: </Heading>
-                <Text>{projeto?.professorName}</Text>
-                <Text>Proff</Text>
+                <Heading as="h3" size="md" fontSize={'20px'}>Nome do Professor:</Heading>
+                <Text fontSize={'15px'}>{projeto?.professorName}</Text>
               </Box>
+              <Separator my={1} />
               <Box>
-              <Heading as="h3" size="xl">Descrição do Projeto:</Heading>
-                <Text>{projeto?.descricao}</Text>
-                <Text>Desc</Text>
+                <Heading as="h3" size="md" fontSize={'20px'}>Descrição do Projeto:</Heading>
+                <Text fontSize={'15px'}>{projeto?.descricao}</Text>
               </Box>
             </Stack>
           </GridItem>
-          {/* Right Column */}
           <GridItem>
             <Stack spacing={4}>
-              <Heading as="h2" size="2xl">Enviar Aplicação</Heading>
+              <Heading as="h2" size="md">Enviar Aplicação</Heading>
               <Input
                 type="file"
                 onChange={handleFileChange}
                 accept=".pdf"
                 required
+                paddingTop={'6px'}
               />
               <Input
                 placeholder="Link do Currículo Lattes"
-                type='url'
+                _placeholder={{ color: "#787878" }}
+                type="url"
                 value={estudanteLattes}
                 onChange={(e) => setEstudanteLattes(e.target.value)}
-                required 
+                required
               />
               <Button
                 mt={4}
@@ -202,6 +211,6 @@ export default function Apply({ onClose }) {
           </GridItem>
         </Grid>
       </Box>
-    </Overlay>
+    </Box>
   );
 }

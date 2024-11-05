@@ -119,13 +119,26 @@ export default function ProcessoDetail() {
   }
 
   return (
-    <Box p={4}>
+    <Box p={8}
+    bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)"
+    minHeight='100vh'>
       {/* Header */}
       <Flex justifyContent="space-between" alignItems="center" mb={8}>
-        <Heading as="h1" size="lg">Coordenador</Heading>
-        <Button colorScheme="red" variant="outline" onClick={logout}>
-          Logout
-        </Button>
+        <div class='header'>
+          <Heading as='h1' size='lg' fontSize='3xl'>
+              <Text as="span" color="red">Sci</Text>
+              <Text as="span" color="white">Connect</Text>
+          </Heading>
+          <Heading size='xs' fontSize={'1x1'}>Coordenador</Heading>
+        </div>
+        <Button
+            colorScheme='red'
+            variant='solid'
+            onClick={logout}
+            _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -2px 6px rgba(255, 0, 0)" }}
+            boxShadow='3px 3px 3px 0px rgba(0, 0, 0, 0.5)'>
+            Logout
+          </Button>
       </Flex>
 
       {/* Process Name and Divider */}
@@ -138,14 +151,16 @@ export default function ProcessoDetail() {
 
       {/* Project Section */}
       <Flex justifyContent="space-between" alignItems="center" mb={4}>
-        <Heading as="h3" size="md">Projetos</Heading>
+        <Heading as="h3" size="md">Processos</Heading>
         <Button
-          colorScheme="green"
-          variant="solid"
-          onClick={() => setIsCreatingProjeto(true)}
-        >
-          Criar Projeto
-        </Button>
+            colorScheme='red'
+            variant='solid'
+            _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -2px 6px rgba(255, 0, 0)" }}
+            boxShadow='3px 3px 3px 0px rgba(0, 0, 0, 0.5)'
+            onClick={() => setIsCreatingProjeto(true)}
+          >
+            Criar Projeto
+          </Button>
       </Flex>
       <Separator />
 
@@ -162,7 +177,7 @@ export default function ProcessoDetail() {
 
       {/* Project Cards */}
       {projetos.length > 0 ? (
-        <SimpleGrid columns={[1, 2, 3]} spacing={3} mt={4} rowGap={10}>
+        <SimpleGrid columns={[1, 2, 3]} mt={4} columnGap={8} rowGap={5}>
           {projetos.map((projeto) => (
             <ProjectCard key={projeto.id} project={projeto} />
           ))}
