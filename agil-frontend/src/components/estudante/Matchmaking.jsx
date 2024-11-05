@@ -95,7 +95,12 @@ export default function Matchmaking() {
             <Text as="span" color="red.500">Sci</Text>
             <Text as="span" color="white">Connect</Text>
         </Heading>
-        <Button to="/estudante" color="#DC143C" variant="outline" borderColor={'#808080'} _hover={{ bg: "FFFFF" }} onClick={goToProjetos}>
+        <Button to="/estudante"
+            colorScheme='red'
+            variant='solid'
+            _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -2px 6px rgba(255, 0, 0)" }}
+            boxShadow='3px 3px 3px 0px rgba(0, 0, 0, 0.5)' 
+            onClick={goToProjetos}>
           Ver Projetos
         </Button>
       </Flex>
@@ -252,7 +257,7 @@ export default function Matchmaking() {
                   src={professor.metadata.photo_url}
                   alt={professor.metadata?.name || 'Professor'}
                   borderRadius="full"
-                  border="2px solid #0E9C8B"
+                  border="2px solid #ff0000"
                 />
               )}
               <Box p="3" textAlign="center">

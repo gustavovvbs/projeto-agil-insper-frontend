@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Box, Flex} from '@chakra-ui/react'
+import { Box, Flex, Text, Spinner } from '@chakra-ui/react'
 
 export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const login = (event) => {
+        setLoading(true)
         event.preventDefault();
         axios.post('https://projeto-agil-insper-backend.onrender.com/auth/login', {
             email: event.target.email.value,
@@ -17,6 +19,7 @@ export default function Login() {
             }
         )
         .then(() => {
+            setLoading(false)
             const role = localStorage.getItem('role');
             if (role === 'coordenador') {
                 window.location.href = '/coordenador';
@@ -27,6 +30,7 @@ export default function Login() {
             }
         })
         .catch((error) => {
+            setLoading(false)
             if (error.response && error.response.status === 404) {
                 setErrorMessage('Email ou senha incorretos');
             } else {
@@ -57,30 +61,45 @@ export default function Login() {
                 maxWidth="400px"
                 textAlign="center"
             >
-                <h1 style={{ fontSize: '30px', fontWeight: 'bold', marginBottom: '5px', color:'#fff'}}>Please Log In</h1>
+                <h1 style={{ fontSize: '30px', fontWeight: 'bold', marginBottom: '5px', color:'#fff'}}>Log In</h1>
                 <br />
-                {errorMessage && (
+                {errorMessage && (  
                     <Box className="error-message" color="red.300" mb="4">
-                        <p>{errorMessage}</p>
+                        <Text>{errorMessage}</Text>
                     </Box>
                 )}
                 <form onSubmit={login} style={{ textAlign: 'left' }} >
                     <label>
-                        <p>Email</p>
-                        <input type="text" name="email" style={{ width: '100%', padding: '8px', marginBottom: '16px', borderRadius:"10px" }} />
+                        <Text color={'white'}>Email:</Text>
+                        <input type="text" name="email" placeholder='Insira o email aqui...' style={{ width: '100%', padding: '8px', marginBottom: '16px', borderRadius:"10px" }} />
                     </label>
                     <br />
                     <br />
                     <label>
-                        <p>Password</p>
-                        <input type="password" name="password" style={{ width: '100%', padding: '8px', marginBottom: '16px', borderRadius:"10px", color: 'black' }} />
+                    <Text color={'white'}>Senha:</Text>
+                        <input type="password" name="password" placeholder='Insira a senha aqui...' style={{ width: '100%', padding: '8px', marginBottom: '16px', borderRadius:"10px", color: 'black' }} />
                     </label>
                     <br />
                     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
                         <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-                            Sing in
+                            Entrar
                         </button>
                     </div>
+                    {loading && (
+                        <Flex
+                            position="fixed"
+                            top="0"
+                            left="0"
+                            width="100%"
+                            height="100%"
+                            alignItems="center"
+                            borderRadius="16px"
+                            justifyContent="center"
+                            bg="rgba(0, 0, 0, 0.6)"
+                            zIndex="1000"
+                        >
+                            <Spinner color="white" size="xl" />
+                    </Flex>)}
                 </form>
             </Flex>
         </Box>
