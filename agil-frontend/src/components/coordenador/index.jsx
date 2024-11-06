@@ -77,7 +77,7 @@ return (
 
         <Separator my={3} />
           <Flex justifyContent="space-between" alignItems="center" mb={4}>
-          <Heading as="h3" size="md">Processos</Heading>
+            <Heading as="h3" size="xl">Processos</Heading>
           <Button
             colorScheme='red'
             variant='solid'
