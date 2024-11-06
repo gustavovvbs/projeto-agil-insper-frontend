@@ -20,6 +20,7 @@ export default function ProjectCard({ project, role }) {
     navigate(`/projects/${project.id}/apply`);
   };
 
+
   return (
     <Box
       borderRadius='lg'
@@ -60,6 +61,11 @@ export default function ProjectCard({ project, role }) {
         {role === 'coordenador' && (
             <Button colorScheme='red' onClick={() => navigate(`/projects/${project.id}/edit`)}>
             Detalhes
+          </Button>
+        )}
+        {role === 'professor' && (
+            <Button colorScheme='red' onClick={() => navigate(`/professor/${project.id}`)}>
+            Ver Aplicações
           </Button>
         )}
        

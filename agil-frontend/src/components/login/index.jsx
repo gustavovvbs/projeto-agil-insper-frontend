@@ -24,7 +24,7 @@ export default function Login() {
             if (role === 'coordenador') {
                 window.location.href = '/coordenador';
             } else if (role === 'professor') {
-                window.location.href = '/professor/professorId';
+                window.location.href =`/professor`;
             } else if (role === 'estudante') {
                 window.location.href = '/estudante';
             }
@@ -34,6 +34,7 @@ export default function Login() {
             if (error.response && error.response.status === 404) {
                 setErrorMessage('Email ou senha incorretos');
             } else {
+                console.log(error);
                 setErrorMessage('Erro desconhecido');
             }
         });

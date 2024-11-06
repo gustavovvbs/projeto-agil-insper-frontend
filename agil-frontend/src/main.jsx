@@ -17,14 +17,16 @@ import Estudante from './components/estudante/index.jsx';
 import Apply from './components/estudante/Apply.jsx';
 import Matchmaking from './components/estudante/Matchmaking.jsx';
 import Professor from './components/professor/index.jsx';
+import Aplicacoes from './components/professor/Aplicacoes.jsx';
+
 const router = createBrowserRouter([
   {
-    path: '/projeto',
+    path: '/professor',
     element: <Professor />,
   },
   {
-    path: '/professor/:professorId',
-    element: <Professor />,
+    path: '/professor/:projetoId',
+    element: <Aplicacoes />,
   },
   {
     path: '/coordenador',
@@ -59,7 +61,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <App />
-  }
+  },
 ]);
 
 

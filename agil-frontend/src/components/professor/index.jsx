@@ -1,91 +1,90 @@
-// src/components/professor/index.jsx
-
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { Button, Flex, Box, Heading, Spinner, SimpleGrid, Separator} from '@chakra-ui/react';
-import { Link, Outlet } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import ProjectCard from '../ProjectCard';
+import React from "react";
+import { useEffect, useState } from "react";    
+import decodeToken from "../../utils/decodeToken";
+import {
+    Box,
+    Heading,
+    Button,
+    SimpleGrid,
+    Flex,
+    Text,
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import ProjectCard from "../ProjectCard";
 
 
 export default function Professor() {
-  const { professorId } = useParams();
-  const [projetos, setProjetos] = useState([]);
-  const [loading, setLoading] = useState(true);
+    const [projetos, setProjetos] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (localStorage.getItem('role') !== 'professor') {
-      window.location.href = '/login';
-    } else {
-      getProjetos();
+    const professor_payload = decodeToken(localStorage.getItem('token'));
+    const professorId = professor_payload.user_id;
+  
+
+    useEffect(() => {
+        if (localStorage.getItem('role') !== 'professor') {
+            navigate('/login');
+        } else {
+            getProjects();
+        }
     }
-  }, [professorId]);
+    , []);
 
-  const getProjetos = async () => {
-    try {
+    const getProjects = async () => {
+      setLoading(true)
+      try {
         const projetosResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/professor/${professorId}/projeto`, {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-          });
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            }
+        });
+        
+            if (projetosResponse.status === 200) {
+                setProjetos(projetosResponse.data);
 
-        const projetosData = await Promise.all(
-            projetosResponse.data.map(async (projeto) => {
-              const professorResponse = await axios.get(`https://projeto-agil-insper-backend.onrender.com/professor/${projeto.professor}`);
-              return {
-            ...projeto,
-            professorName: professorResponse.data.nome,
-            professorEmail: professorResponse.data.email,
-              };
-            })
-          );
-        setProjetos(projetosData);
-    } catch (error) {
-      console.error('Error fetching projetos:', error);
-      setProjetos([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+            }
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    window.location.href = '/login';
-  };
+        } catch (error) {
+            console.error('Error fetching projects:', error);
+            setProjetos([]);
 
-  if (loading) {
+        } finally {
+            setLoading(false);
+        }
+
+    };
+
+    const logout = () => {
+        localStorage.removeItem('role');
+        navigate('/login');
+    };
+
+    
     return (
-      <Flex align="center" justify="center" height="100vh">
-        <Spinner size="xl" />
-      </Flex>
-    );
-  }
-
-return (
-    <Box p={4}>
-        <Flex justifyContent="space-between" alignItems="center">
-            <Heading fontSize='3xl'>Professor</Heading>
-            <Button onClick={logout} colorScheme="red">
+        <Box p={8}
+        bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)"
+        minHeight='100vh'>
+            {/* Header */}
+            <Flex justifyContent="space-between" alignItems="center" mb={8}>
+            <div class='header'>
+                <Heading as='h1' size='lg' fontSize='3xl'>
+                    <Text as="span" color="red">Sci</Text>
+                    <Text as="span" color="white">Connect</Text>
+                </Heading>
+                <Heading size='xs' fontSize={'1x1'}>Professor</Heading>
+            </div>
+            <Button colorScheme="red" variant="outline" onClick={logout}>
                 Logout
             </Button>
-        </Flex>
-        <Separator my={6} />
-        <Flex justifyContent="space-between" alignItems="center" mt={6} mb={50}>
-            <Heading size="6xl">
-                Meus Projetos
-            </Heading>
-            <Button as={Link} to="create-projeto" colorScheme="green">
-                Criar Projeto
-            </Button>
-        </Flex>
-        { <SimpleGrid columns={[1, 2, 3]} wordSpacing='inherit' columnGap={10} rowGap={20}>    
-            {
-            projetos.map((projeto) => (
-                <ProjectCard key={projeto.id} project={projeto} />
-            ))}
-        </SimpleGrid> }
-        <Outlet />
-    </Box>
-);
+            </Flex>
+            <SimpleGrid columns={2} spacing={4}>
+                {projetos.map((projeto) => (
+                    <ProjectCard key={projeto.id} project={projeto} role={localStorage.getItem('role')} />
+                ))}
+            </SimpleGrid>
+        </Box>
+    )
 }
