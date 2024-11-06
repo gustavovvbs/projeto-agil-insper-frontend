@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Button, Input, Stack, Text} from '@chakra-ui/react';
+import { Box, Button, Input, Stack, Text } from '@chakra-ui/react';
 import { createToaster, Heading} from '@chakra-ui/react';
+import { CloseButton } from './ui/close-button';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import dayjs from 'dayjs';
 
@@ -8,6 +10,7 @@ export default function CreateProcesso() {
   const [titulo, setTitulo] = useState('');
   const [data, setData] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +53,10 @@ export default function CreateProcesso() {
     }
   };
 
+  const handleClose = () => {
+    navigate('/coordenador');
+  };
+
   return (
     <Box
     bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)"
@@ -73,6 +80,7 @@ export default function CreateProcesso() {
       transform="scale(1.2)"
       boxShadow = "0px 0px 7px rgba(0, 0, 0, 0), 0 -2px 10px rgba(255, 0, 0)"
       >
+        <CloseButton color="white" onClick={handleClose} _hover={{ bg: "#FFFFF", color: '#000000' }}/>
         <Stack spacing={4} color = 'white'>
 
           <Text fontSize="3xl" fontWeight="bold" marginLeft='63px'>Criar Novo Processo</Text>
