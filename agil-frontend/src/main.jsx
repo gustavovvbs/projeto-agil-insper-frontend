@@ -18,6 +18,7 @@ import Apply from './components/estudante/Apply.jsx';
 import Matchmaking from './components/estudante/Matchmaking.jsx';
 import Professor from './components/professor/index.jsx';
 import Aplicacoes from './components/professor/Aplicacoes.jsx';
+import RecuperarSenha from './components/login/RecuperarSenha.jsx';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />
+  },
+  {
+    path: '/login/recuperar-senha',
+    element: <RecuperarSenha />
   },
   {
     path: '/coordenador/create-processo',
