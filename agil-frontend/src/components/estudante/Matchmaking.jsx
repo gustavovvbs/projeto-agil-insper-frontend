@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
   Button,
@@ -224,8 +224,9 @@ export default function Matchmaking() {
       <br />
       <br />
 
+{/* Parte para inserir os professores na tela. */}
+
       {professors.length > 1 && ( 
-        
       <Box mt={4} p={8}>
         <Flex alignItems="center" justifyContent="center" textAlign="center">
           <Heading as="h1" size="md" color="#fff" fontSize="4xl">
