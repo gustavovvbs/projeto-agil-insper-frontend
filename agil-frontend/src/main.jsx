@@ -19,11 +19,16 @@ import Matchmaking from './components/estudante/Matchmaking.jsx';
 import Professor from './components/professor/index.jsx';
 import Aplicacoes from './components/professor/Aplicacoes.jsx';
 import RecuperarSenha from './components/login/RecuperarSenha.jsx';
+import Register from './components/login/Register.jsx ';
 
 const router = createBrowserRouter([
   {
     path: '/professor',
     element: <Professor />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
   },
   {
     path: '/professor/:projetoId',
