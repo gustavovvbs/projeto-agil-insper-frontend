@@ -7,6 +7,12 @@ import { useNavigate } from 'react-router-dom';
 export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
+    const goToRegister = () => {
+        navigate('/register');
+      }
+    
+
     const login = (event) => {
         setLoading(true)
         event.preventDefault();
@@ -87,19 +93,20 @@ export default function Login() {
                     <input type="password" name="password" placeholder='Insira a senha aqui...' style={{ width: '100%', padding: '8px', marginBottom: '16px', borderRadius:"10px", color: 'black' }} />
                 </label>
                 <br />
-                <Button
-                    leftIcon={<FiLogOut />} colorScheme='red' variant='solid' width = '47%' height='100%'
-                    _ mt={4} bg = 'transparent' marginTop = '3px' marginLeft='0px' size = 'lg' marginBottom = '7px'
-                    _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -1px 13px rgba(255, 0, 0)", transform: "scale(1.06)", transition: "all 0.2s",}}
-                >
-                    Esqueci minha senha
-                </Button>
                 <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
                     <button type="submit" style={{ padding: '10px 50px', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
                         Entrar
                     </button>
                 </div>
-        
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+                    <Button
+                        onClick={goToRegister}
+                        bg="rgba(0, 0, 0, 0.6)"
+                        _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -1px 13px rgba(255, 0, 0)", transform: "scale(1.06)", transition: "all 0.2s",}}
+                    >
+                        Cadastrar-se
+                    </Button>
+                </div>
                 {loading && (
                     <Flex
                         position="fixed"
