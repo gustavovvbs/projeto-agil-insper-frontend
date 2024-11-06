@@ -8,6 +8,10 @@
   width: 0;
 }
 
+html {
+  background-color: #000;
+}
+
 .logo {
   height: 96px; /* 6em assuming 16px base font size */
   padding: 24px; /* 6 * 4px */

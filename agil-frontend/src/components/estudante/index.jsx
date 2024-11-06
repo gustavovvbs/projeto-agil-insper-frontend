@@ -67,9 +67,7 @@ export default function Estudante() {
     navigate('/login');
   };
 
-  const openOtherPage = () => {
-    navigate('/matchmaking');
-  };
+ 
 
   if (loading) {
     return (
@@ -98,7 +96,6 @@ export default function Estudante() {
             eftIcon={<FiLogOut />}
             colorScheme='red'
             variant='solid'
-            onClick={openOtherPage}
             _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -2px 6px rgba(255, 0, 0)" }}
             boxShadow='2px 2px 2px 0px rgba(0, 0, 0, 0.5)'
           >

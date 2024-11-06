@@ -8,6 +8,7 @@ import {
   Flex,
   Button,
   Separator,
+
 } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -53,16 +54,31 @@ export default function Aplicacoes() {
     }
     console.log(aplicacoes);
     return (
-        <Box>
-            <Flex justifyContent="space-between" alignItems="center" mb={8}>
-                <Heading as="h1" size="lg">Aplicações</Heading>
-                <Button onClick={() => setIsCreatingProjeto(true)}>Criar Projeto</Button>
+        <Box
+        bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)"
+        minHeight='100vh'>
+            <Flex height={"80px"}>
+                <Heading as='h1' size='lg' fontSize='3xl' margin={"auto 32px"}>Aplicações</Heading>
+                <Button 
+                    onClick={() => setIsCreatingProjeto(true)} 
+                    margin={"auto 20px auto auto"}
+                    _hover={{backgroundColor:"white", color:"black"}}
+                >
+                    Criar Projeto
+                </Button>
             </Flex>
             <Separator />
             {loading ? (
                 <Spinner />
             ) : (
-                <SimpleGrid columns={3} spacing={4}>
+                <SimpleGrid 
+                    columns={2} 
+                    spacing={4} 
+                    margin={"25px auto"} 
+                    width={"80%"} 
+                    rowGap={"15px"} 
+                    columnGap={"15px"}
+                >
                     {aplicacoes.map((aplicacao) => (
                         <ApplicationCard aplicacao={aplicacao} />
 ))}

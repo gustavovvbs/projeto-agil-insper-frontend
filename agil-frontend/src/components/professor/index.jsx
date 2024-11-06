@@ -76,11 +76,14 @@ export default function Professor() {
                 </Heading>
                 <Heading size='xs' fontSize={'1x1'}>Professor</Heading>
             </div>
-            <Button colorScheme="red" variant="outline" onClick={logout}>
+            <Button 
+                margin={"auto 20px auto auto"}
+                _hover={{backgroundColor:"white", color:"black"}}
+                onClick={logout}>
                 Logout
             </Button>
             </Flex>
-            <SimpleGrid columns={2} spacing={4}>
+            <SimpleGrid columns={3} spacing={4}  rowGap={"10px"} columnGap={"10px"}>
                 {projetos.map((projeto) => (
                     <ProjectCard key={projeto.id} project={projeto} role={localStorage.getItem('role')} />
                 ))}

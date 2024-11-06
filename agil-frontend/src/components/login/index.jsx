@@ -88,7 +88,7 @@ export default function Login() {
                 </label>
                 <br />
                 <Button
-                    leftIcon={<FiLogOut />} colorScheme='red' variant='solid' onClick={openOtherPage} width = '47%' height='100%'
+                    leftIcon={<FiLogOut />} colorScheme='red' variant='solid' width = '47%' height='100%'
                     _ mt={4} bg = 'transparent' marginTop = '3px' marginLeft='0px' size = 'lg' marginBottom = '7px'
                     _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -1px 13px rgba(255, 0, 0)", transform: "scale(1.06)", transition: "all 0.2s",}}
                 >
