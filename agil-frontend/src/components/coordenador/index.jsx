@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Button, Flex, Box, Heading, Spinner, SimpleGrid, Separator, Text} from '@chakra-ui/react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import ProcessoCard from '../ProcessoCard';
 import CreateProcesso from '../CreateProcesso';
 
@@ -18,6 +18,8 @@ export default function Coordenador() {
       getProcessos();
     }
   }, []);
+
+  const navigate = useNavigate();
 
   const getProcessos = async () => {
     try {
@@ -51,6 +53,10 @@ export default function Coordenador() {
     );
   }
 
+  const createProcesso = () => {
+    navigate('/coordenador/create-processo');
+  }
+
 return (
     <Box p={8}
     bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)"
@@ -74,18 +80,17 @@ return (
           </Button>
         </Flex>
 
-
         <Separator my={3} />
           <Flex justifyContent="space-between" alignItems="center" mb={4}>
-            <Heading as="h3" size="xl">Processos</Heading>
+          <Heading as="h3" size="md">Processos</Heading>
           <Button
             colorScheme='red'
             variant='solid'
             _hover={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.5), 0 -2px 6px rgba(255, 0, 0)" }}
             boxShadow='3px 3px 3px 0px rgba(0, 0, 0, 0.5)'
-            onClick={() => setIsCreatingProjeto(true)}
+            onClick={createProcesso}
           >
-            Criar Projeto
+            Criar Processo
           </Button>
         </Flex>
         <Separator my={4}/>
