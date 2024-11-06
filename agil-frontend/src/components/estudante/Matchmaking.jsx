@@ -72,7 +72,6 @@ export default function Matchmaking() {
       setProfessors(response.data);
     } catch (error) {
       console.error('Erro ao buscar professores:', error);
-      setError('Erro ao buscar professores.');
     } finally {
       setLoading(false)
     }
