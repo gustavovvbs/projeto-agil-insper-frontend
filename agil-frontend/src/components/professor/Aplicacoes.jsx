@@ -10,7 +10,7 @@ import {
   Separator,
 
 } from '@chakra-ui/react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ProjectCard from '../ProjectCard';
 import CreateProjetoCoord from '../CreateProjetoCoord';
@@ -53,26 +53,66 @@ export default function Aplicacoes() {
         }
     }
     console.log(aplicacoes);
+
+    const logout = () => {
+        localStorage.removeItem('role');
+        navigate('/login');
+    };
+
+    const navigate = useNavigate()
+
+    const goback = () => {
+        navigate('/professor');
+    };
+
     return (
-        <Box
+        <Box p={8}
         bg="radial-gradient(circle at 50% -105%, #ff0000 10%, #8b0000 30%, #000000 70%)"
         minHeight='100vh'>
+            {/* Header */}
+            <Flex justifyContent="space-between" alignItems="center" mb={8}>
+            <div class='header'>
+                <Heading as='h1' size='lg' fontSize='3xl'>
+                    <Text as="span" color="red">Sci</Text>
+                    <Text as="span" color="white">Connect</Text>
+                </Heading>
+                <Heading size='xs' fontSize={'1x1'}>Professor</Heading>
+            </div>
+            <Button 
+                margin={"auto 20px auto auto"}
+                _hover={{backgroundColor:"white", color:"black"}}
+                onClick={logout}>
+                Logout
+            </Button>
+            </Flex>
+            <Button onClick={goback} margin={"auto 20px auto auto"} _hover={{backgroundColor:"white", color:"black"}}>
+                Voltar
+            </Button>
+
+            <br />
+            
             <Flex height={"80px"}>
                 <Heading as='h1' size='lg' fontSize='3xl' margin={"auto 32px"}>Aplicações</Heading>
-                <Button 
-                    onClick={() => setIsCreatingProjeto(true)} 
-                    margin={"auto 20px auto auto"}
-                    _hover={{backgroundColor:"white", color:"black"}}
-                >
-                    Criar Projeto
-                </Button>
             </Flex>
             <Separator />
-            {loading ? (
-                <Spinner />
-            ) : (
+            {loading && (
+                        <Flex
+                            position="fixed"
+                            top="0"
+                            left="0"
+                            width="100%"
+                            height="100%"
+                            alignItems="center"
+                            borderRadius="16px"
+                            justifyContent="center"
+                            bg="rgba(0, 0, 0, 0.6)"
+                            zIndex="1000"
+                        >
+                            <Spinner color="white" size="xl" />
+                    </Flex>
+                )}
                 <SimpleGrid 
-                    columns={2} 
+                    columns={3} 
                     spacing={4} 
                     margin={"25px auto"} 
                     width={"80%"} 
@@ -83,7 +123,6 @@ export default function Aplicacoes() {
                         <ApplicationCard aplicacao={aplicacao} />
 ))}
                 </SimpleGrid>
-            )}
         </Box>
     );
     

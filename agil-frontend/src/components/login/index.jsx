@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Login() {
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
-    const navigate = useNavigate
+    const navigate = useNavigate()
     const goToRegister = () => {
         navigate('/register');
       }
